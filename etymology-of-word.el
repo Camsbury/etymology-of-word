@@ -21,4 +21,16 @@
            (replace-regexp-in-string "&quot;" "\"")
            (message))))))
 
+;;;###autoload
+(defun etymology-of-word-at-point ()
+  "Call `etymology-of-word' on the point or marked phrase"
+  (interactive)
+  (if (region-active-p)
+      (etymology-of-word
+       (buffer-substring-no-properties
+        (region-beginning)
+        (region-end)))
+    (etymology-of-word (substring-no-properties
+                        (thing-at-point 'word)))))
+
 (provide 'etymology-of-word)
